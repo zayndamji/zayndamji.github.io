@@ -78,9 +78,11 @@
     else if (key == 'Backspace') {
       if (length > 0) {
         document.getElementById('pi').removeChild(document.getElementById('pi').lastChild);
-        if (incorrect == 0) length--
+        if (incorrect == 0) {
+          length--
+          subtractFromCounter()
+        }
         incorrect = 0
-        subtractFromCounter()
       }
     }
 
