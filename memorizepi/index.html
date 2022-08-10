@@ -23,7 +23,9 @@
 
 <body>
   <div style="font-size: 150%">
-    <span>Start typing anywhere on the screen (hint: pi starts with 3.14).</span>
+    <span>Start typing anywhere on the screen (hint: pi starts with 3.14).</span><br>
+    <span>You have entered
+      <strong><span id="cor">0</span></strong> digits so far.</span>
   </div>
   <div class='container'>
     <p>Pi:<br><span id='pi'></span></p>
@@ -70,6 +72,7 @@
       span.style.color = 'darkgray'
       document.getElementById('pi').append(span)
       length++
+      addToCounter()
     }
 
     else if (key == 'Backspace') {
@@ -77,6 +80,7 @@
         document.getElementById('pi').removeChild(document.getElementById('pi').lastChild);
         if (incorrect == 0) length--
         incorrect = 0
+        subtractFromCounter()
       }
     }
 
@@ -84,6 +88,7 @@
       length = 0
       incorrect = 0
       document.getElementById('pi').textContent = ''
+      resetCounter()
     }
 
     else if (allowed.includes(key)) {
@@ -98,6 +103,7 @@
         else span.style.color = '#68fc04'
         incorrect = 0
         length++
+        addToCounter()
       }
 
       else {
@@ -108,4 +114,20 @@
       document.getElementById('pi').append(span)
     }
   })
+
+  function addToCounter(perfect = false) {
+    var counter = parseInt(document.getElementById('cor').textContent)
+    counter++
+    document.getElementById('cor').textContent = counter
+  }
+
+  function subtractFromCounter() {
+    var counter = document.getElementById('cor').textContent
+    counter--
+    document.getElementById('cor').textContent = counter
+  }
+
+  function resetCounter() {
+    document.getElementById('cor').textContent = '3'
+  }
 </script>
