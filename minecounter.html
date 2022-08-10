@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:ital@0;1&display=swap');
+
+  * {
+    font-family: Roboto, sans-serif;
+    padding: 2px;
+  }
+</style>
+
+<body>
+  <h2>Current Points: <span id='points'>0</span></h2>
+  <div id="main"></div>
+</body>
+
+<script>
+  const values = [
+    {name: 'Emerald Ore', value: 350},
+    {name: 'Ancient Debris', value: 250},
+    {name: 'Diamond Ore', value: 150},
+    {name: 'Gold Ore', value: 20},
+    {name: 'Lapis Lazuli Ore', value: 15},
+    {name: 'Redstone Ore', value: 15},
+    {name: 'Iron Ore', value: 8},
+    {name: 'Copper Ore', value: 4},
+    {name: 'Nether Gold Ore', value: 4},
+    {name: 'Nether Quartz Ore', value: 4},
+    {name: 'Coal Ore', value: 4},
+    {name: 'Obsidian', value: 3},
+    {name: 'Glowstone', value: 1}
+  ]
+
+  for (let i = 0; i < values.length; i++)
+    values[i].formattedName = values[i].name.split(' ').join('_').toLowerCase()
+
+  const main = document.getElementById('main')
+
+  for (let i = 0; i < values.length; i++) {
+    const element = document.createElement('div')
+
+    const title = document.createElement('span')
+    title.textContent = `${values[i].name} - `
+
+    const number = document.createElement('input')
+    number.setAttribute('type', 'number')
+    number.setAttribute('id', values[i].formattedName)
+    number.setAttribute('name', values[i].formattedName)
+    number.setAttribute('value', 0)
+    number.setAttribute('min', 0)
+    number.setAttribute('style', 'width: 50px')
+    number.addEventListener('input', updatePointCounter)
+
+    const description = document.createElement('span')
+    description.textContent = ` ${values[i].value} points.`
+    description.setAttribute('style', 'font-style: italic;')
+
+    element.appendChild(title)
+    element.appendChild(number)
+    element.appendChild(description)
+    main.appendChild(element)
+  }
+
+  function updatePointCounter(e) {
+    let points = 0
+    for (let i = 0; i < values.length; i++) {
+      const currentBlock = document.getElementById(values[i].formattedName)
+      points += currentBlock.value * values[i].value
+    }
+
+    document.getElementById('points').textContent = points
+  }
+</script>
