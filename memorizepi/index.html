@@ -23,38 +23,46 @@
 
 <body>
   <div style="font-size: 150%">
-    <span>Enter Digit Here: </span>
-    <input type=text id='input'>
+    <span>Start typing anywhere on the screen (hint: pi starts with 3.14).</span>
   </div>
   <div class='container'>
     <p>Pi:<br><span id='pi'></span></p>
   </div>
   <div style="font-size: 125%">
     <strong>How to Memorize Pi:</strong><br>
-    Enter the digits of pi into the box one by one.<br>
-    If you enter the digit correctly, it will turn <span style="color: #68fc04">green</span>, <span style="color: #d8fc04">light green</span>, <span style="color: #fffc04">yellow</span>, <span style="color: #ffd580">orange</span>, or <span style="color: #ff0404">red</span> based on how many times it was entered incorrectly.<br>
-    If you enter the digit incorrectly, it will turn <span style="color: red">red</span>, and you will be able to keep on trying that digit until you get it correct or click enter.<br>
-    Click enter to skip the digit. This will <span style="color: gray">gray</span> the number and you will be able to go onto the next digit. If the digit is currently red (since you have gotten it wrong at least once), it will just gray it out and move on.<br>
-    Click backspace to delete the most recent digit. If you are currently guessing a digit, it will delete it and reset it to <span style="color: #68fc04">green</span>.
+    Enter the digits of pi anywhere on the screen one by one.<br>
+    If you enter the digit correctly, it will turn <span style="color: #68fc04">green</span>, <span
+      style="color: #d8fc04">light green</span>, <span style="color: #fffc04">yellow</span>, <span
+      style="color: #ffd580">orange</span>, or <span style="color: #ff0404">red</span> based on how many times it was
+    entered incorrectly.<br>
+    If you enter the digit incorrectly, it will turn <span style="color: red">red</span>, and you will be able to keep
+    on trying that digit until you get it correct or click enter.<br>
+    Click enter to skip the digit. This will <span style="color: gray">gray</span> the number and you will be able to go
+    onto the next digit. If the digit is currently red (since you have gotten it wrong at least once), it will just gray
+    it out and move on.<br>
+    Click backspace to delete the most recent digit. If you are currently guessing a digit, it will delete it and reset
+    it to <span style="color: #68fc04">green</span>.
   </div>
 </body>
 
 <script>
-  let length = 0;
-  const pi = '3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679821480865132823066470938446095505822317253594081284811174502841027019385211055596446229489549303819644288109756659334461284756482337867831652712019091456485669234603486104543266482133936072602491412737245870066063155881748815209209628292540917153643678925903600113305305488204665213841469519415116094330572703657'
+  var length = 0;
+  var pi = '3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679821480865132823066470938446095505822317253594081284811174502841027019385211055596446229489549303819644288109756659334461284756482337867831652712019091456485669234603486104543266482133936072602491412737245870066063155881748815209209628292540917153643678925903600113305305488204665213841469519415116094330572703657'
 
-  let span
-  let correct = true
-  let incorrect = 0
-  const userInput = document.getElementById('input')
-  userInput.addEventListener('keydown', e => {
-    console.log(e.key)
-    if (length >= 2) document.getElementById('input').setAttribute('type', 'number')
-    if (e.key == 'Enter') {
-      const num = pi.substring(length, length + 1)
-      if (correct) {
-        span = document.createElement('span')
-      }
+  var span
+  var correct = true
+  var incorrect = 0
+
+  var allowed = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '.']
+
+  document.addEventListener('keydown', e => {
+    var key = e.key
+    var num = pi.substring(length, length + 1)
+    console.log(key, num)
+
+    if (correct) span = document.createElement('span')
+
+    if (key == 'Enter') {
       correct = true
       incorrect = 0
       span.textContent = num
@@ -62,55 +70,35 @@
       document.getElementById('pi').append(span)
       length++
     }
-    if (e.key == 'Backspace') {
-      if (length > 7) {
+
+    else if (key == 'Backspace') {
+      if (length > 0) {
         document.getElementById('pi').removeChild(document.getElementById('pi').lastChild);
         if (incorrect == 0) length--
         incorrect = 0
       }
     }
-  })
-  userInput.addEventListener('input', e => {
-    const input = e.target.value
-    e.target.value = ''
-    const num = pi.substring(length, length + 1)
 
-    if (correct) {
-      span = document.createElement('span')
-    }
-    correct = num == input
-    span.textContent = input
-    if (correct) {
-      console.log(incorrect)
-      if (incorrect >= 4) span.style.color = '#ff0404'
-      else if (incorrect >= 3) span.style.color = '#ffd580'
-      else if (incorrect >= 2) span.style.color = '#fffc04'
-      else if (incorrect >= 1) span.style.color = '#d8fc04'
-      else span.style.color = '#68fc04'
-      incorrect = 0
-      length++
-    }
-    else {
-      span.style.color = '#ff0404'
-      incorrect++
-    }
+    else if (allowed.includes(key)) {
+      correct = num == key
+      span.textContent = key
 
-    document.getElementById('pi').append(span)
-  })
-
-  function getCookie(cname) {
-    let name = cname + "=";
-    let decodedCookie = decodeURIComponent(document.cookie);
-    let ca = decodedCookie.split(';');
-    for(let i = 0; i <ca.length; i++) {
-      let c = ca[i];
-      while (c.charAt(0) == ' ') {
-        c = c.substring(1);
+      if (correct) {
+        if (incorrect >= 4) span.style.color = '#ff0404'
+        else if (incorrect >= 3) span.style.color = '#ffd580'
+        else if (incorrect >= 2) span.style.color = '#fffc04'
+        else if (incorrect >= 1) span.style.color = '#d8fc04'
+        else span.style.color = '#68fc04'
+        incorrect = 0
+        length++
       }
-      if (c.indexOf(name) == 0) {
-        return c.substring(name.length, c.length);
+
+      else {
+        span.style.color = '#ff0404'
+        incorrect++
       }
+
+      document.getElementById('pi').append(span)
     }
-    return "";
-  }
+  })
 </script>
