@@ -41,7 +41,8 @@
     onto the next digit. If the digit is currently red (since you have gotten it wrong at least once), it will just gray
     it out and move on.<br>
     Click backspace to delete the most recent digit. If you are currently guessing a digit, it will delete it and reset
-    it to <span style="color: #68fc04">green</span>.
+    it to <span style="color: #68fc04">green</span>.<br>
+    Click 'r' to reset the entire number. ONLY DO THIS IF YOU ARE SURE!<br>
   </div>
 </body>
 
@@ -53,7 +54,7 @@
   var correct = true
   var incorrect = 0
 
-  var allowed = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '.']
+  var allowed = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '.', 'r']
 
   document.addEventListener('keydown', e => {
     var key = e.key
@@ -77,6 +78,12 @@
         if (incorrect == 0) length--
         incorrect = 0
       }
+    }
+
+    else if (key == 'r') {
+      length = 0
+      incorrect = 0
+      document.getElementById('pi').textContent = ''
     }
 
     else if (allowed.includes(key)) {
