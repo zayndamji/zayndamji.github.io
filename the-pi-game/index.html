@@ -55,7 +55,7 @@
     </tr>
   </table>
   <div style="font-size: 125%">
-    <span>Start typing the digits of pi!</span><br>
+    <span>Start typing the digits of pi!</span><br><input type=text id='userInput'><br>
   </div>
   <div class='container'>
     <p>Pi:<br><span id='pi'></span></p>
@@ -147,6 +147,10 @@
 
       document.getElementById('pi').append(span)
     }
+  })
+
+  document.getElementById('userInput').addEventListener('input', e => {
+    e.target.value = ''
   })
 
   function addToCounter(perfect = false, skipped = false) {
