@@ -25,7 +25,8 @@
   <div style="font-size: 150%">
     <span>Start typing anywhere on the screen (hint: pi starts with 3.14).</span><br>
     <span>You have entered
-      <strong><span id="cor">0</span></strong> digits so far.</span>
+      <strong><span id="cor">0</span></strong> digits so far; <strong><span id="per">0</span></strong> were
+      perfect.</span>
   </div>
   <div class='container'>
     <p>Pi:<br><span id='pi'></span></p>
@@ -103,9 +104,9 @@
         else if (incorrect >= 2) span.style.color = '#fffc04'
         else if (incorrect >= 1) span.style.color = '#d8fc04'
         else span.style.color = '#68fc04'
-        incorrect = 0
         length++
-        addToCounter()
+        addToCounter(incorrect == 0)
+        incorrect = 0
       }
 
       else {
@@ -121,6 +122,12 @@
     var counter = parseInt(document.getElementById('cor').textContent)
     counter++
     document.getElementById('cor').textContent = counter
+
+    if (perfect) {
+      var counter = parseInt(document.getElementById('per').textContent)
+      counter++
+      document.getElementById('per').textContent = counter
+    }
   }
 
   function subtractFromCounter() {
@@ -130,6 +137,6 @@
   }
 
   function resetCounter() {
-    document.getElementById('cor').textContent = '3'
+    document.getElementById('cor').textContent = '0'
   }
 </script>
