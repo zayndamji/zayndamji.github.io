@@ -19,14 +19,43 @@
   span {
     padding: 2px;
   }
+
+  table {
+    font-size: 100%;
+    border-color: black;
+    border-width: 0.2em;
+    border-style: solid;
+  }
+
+  th,
+  td {
+    padding: 0.3em;
+  }
 </style>
 
 <body>
-  <div style="font-size: 150%">
-    <span>Start typing anywhere on the screen (hint: pi starts with 3.14).</span><br>
-    <span>You have entered
-      <strong><span id="cor">0</span></strong> digits so far; <strong><span id="per">0</span></strong> were
-      perfect.</span>
+  <table style="float: right; margin-left: 1em;">
+    <tr>
+      <th>Entered</th>
+      <strong>
+        <td id="cor">0</td>
+      </strong>
+    </tr>
+    <tr>
+      <th>Perfect</th>
+      <strong>
+        <td id="per">0</td>
+      </strong>
+    </tr>
+    <tr>
+      <th>Skipped</th>
+      <strong>
+        <td id="ski">0</td>
+      </strong>
+    </tr>
+  </table>
+  <div style="font-size: 125%">
+    <span>Start typing the digits of pi!</span><br>
   </div>
   <div class='container'>
     <p>Pi:<br><span id='pi'></span></p>
@@ -40,7 +69,8 @@
     entered incorrectly.<br>
     If you enter the digit incorrectly, it will turn <span style="color: red">red</span>, and you will be able to keep
     on trying that digit until you get it correct or click enter.<br>
-    Click enter to skip the digit. This will <span style="color: gray">gray</span> the number and you will be able to go
+    Click enter to skip the digit. This will <span style="color: darkgray">gray</span> the number and you will be able
+    to go
     onto the next digit. If the digit is currently red (since you have gotten it wrong at least once), it will just gray
     it out and move on.<br>
     Click backspace to delete the most recent digit. If you are currently guessing a digit, it will delete it and reset
@@ -57,7 +87,7 @@
   var correct = true
   var incorrect = 0
 
-  var allowed = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '.', 'r']
+  var allowed = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '.']
 
   document.addEventListener('keydown', e => {
     var key = e.key
@@ -73,16 +103,15 @@
       span.style.color = 'darkgray'
       document.getElementById('pi').append(span)
       length++
-      addToCounter()
+      addToCounter(false, true)
     }
 
     else if (key == 'Backspace') {
       if (length > 0) {
-        document.getElementById('pi').removeChild(document.getElementById('pi').lastChild);
         if (incorrect == 0) {
           length--
           subtractFromCounter()
-        }
+        } document.getElementById('pi').removeChild(document.getElementById('pi').lastChild);
         incorrect = 0
       }
     }
@@ -118,7 +147,7 @@
     }
   })
 
-  function addToCounter(perfect = false) {
+  function addToCounter(perfect = false, skipped = false) {
     var counter = parseInt(document.getElementById('cor').textContent)
     counter++
     document.getElementById('cor').textContent = counter
@@ -128,15 +157,35 @@
       counter++
       document.getElementById('per').textContent = counter
     }
+
+    if (skipped) {
+      var counter = parseInt(document.getElementById('ski').textContent)
+      counter++
+      document.getElementById('ski').textContent = counter
+    }
   }
 
   function subtractFromCounter() {
     var counter = document.getElementById('cor').textContent
     counter--
     document.getElementById('cor').textContent = counter
+
+    if (document.getElementById('pi').lastChild.style.color == 'rgb(104, 252, 4)') {
+      var counter = document.getElementById('per').textContent
+      counter--
+      document.getElementById('per').textContent = counter
+    }
+
+    if (document.getElementById('pi').lastChild.style.color == 'darkgray') {
+      var counter = document.getElementById('ski').textContent
+      counter--
+      document.getElementById('ski').textContent = counter
+    }
   }
 
   function resetCounter() {
     document.getElementById('cor').textContent = '0'
+    document.getElementById('per').textContent = '0'
+    document.getElementById('ski').textContent = '0'
   }
 </script>
