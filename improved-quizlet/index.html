@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Roboto:ital@0;1&display=swap');
+      body {
+        font-family: Roboto, 'Open Sans', 'Helvetica Neue', sans-serif;
+        padding-left: 1em;
+      }
+      div.question {
+        margin-bottom: 1em;
+      }
+      button {
+        margin-bottom: 0.5em;
+      }
+    </style>
+
+    <title>Improved Quizlet</title>
+    <link rel="icon" href="https://assets.quizlet.com/a/j/dist/app/i/logo/2021/q-twilight.389092a385cb51d.png">
+  </head>
+  <body>
+    <h1>Improved Quizlet (for Spanish 1, but you can use it for anything)</h1>
+    <h4>Press Enter if you think you are correct or if you want to skip the question.<br>You don't need to have the correct capitalization.</h4>
+    <button onclick="restartQuiz()" id="restart">Restart</button>
+    &nbsp;
+    <button onclick="showImportFromQuizlet()" id="import">Import from Quizlet</button>
+    <br>
+    <button onclick="importFromFile('./sets/week4.txt')" id="week4">Week 4</button>
+    &nbsp;
+    <button onclick="importFromFile('./sets/week5.txt')" id="week5">Week 5</button>
+    &nbsp;
+    <button onclick="importFromFile('./sets/week6.txt')" id="week6">Week 6</button>
+    <br><br>
+    <div id="newQuestionsDiv" hidden>
+      <textarea id="newQuestions" style="width: 30em; height: 30em;"></textarea>
+      <br>
+      <button onclick="generateQuestions()" id="submitNewQuestions">Generate Questions</button>
+    </div>
+    <div id="questions"></div>
+  </body>
+</html>
+
+<script>
+  importFromFile('./sets/week6.txt')
+
+  let words = []
+
+  function importFromFile(filename) {
+    $.get(filename, content => {
+      clearWords()
+      generateWords(content)
+      generateQuiz()
+      document.getElementById(0).select()
+      restartQuiz()
+    })
+  }
+
+  function generateWords(inputWords) {
+    inputWords.split('\n').forEach(word => {
+      words.push(word.split('\t'))
+    })
+  }
+
+  function restartQuiz() {
+    for (let i = 0; i < words.length; i++) {
+      const question = document.getElementById(i)
+      question.value = ''
+      question.removeAttribute('readonly')
+      question.style.borderColor = 'lightgray'
+      const div = document.getElementById(`div${i}`)
+      const correct = document.getElementById(`correct${i}`)
+      if (correct != undefined)
+        div.removeChild(correct)
+    }
+    document.getElementById(0).select()
+    document.body.scrollTop = document.documentElement.scrollTop = 0
+    document.getElementById('newQuestionsDiv').setAttribute('hidden', 'hidden')
+  }
+
+  function showImportFromQuizlet() {
+    clearWords()
+    document.getElementById('newQuestionsDiv').removeAttribute('hidden')
+  }
+
+  function clearWords() {
+    document.getElementById('questions').textContent = ''
+    words = []
+  }
+
+  function generateQuestions() {
+    if (document.getElementById('newQuestions').value != '') {
+      document.getElementById('newQuestionsDiv').setAttribute('hidden', 'hidden')
+      generateWords(document.getElementById('newQuestions').value)
+      generateQuiz()
+    }
+    else {
+      alert("You have not entered any input!")
+    }
+  }
+
+  function generateQuiz() {
+    for (let i = 0; i < words.length; i++) {
+      const wordDiv = document.createElement('div')
+      wordDiv.setAttribute('class', 'question')
+      wordDiv.setAttribute('id', `div${i}`)
+
+      const wordDesc = document.createElement('span')
+      const wordInput = document.createElement('input')
+
+      wordDesc.textContent = `${words[i][0]} - `
+      wordInput.setAttribute('type', 'text')
+      wordInput.setAttribute('id', i)
+      wordInput.style.borderColor = 'lightgray'
+      wordInput.addEventListener('keypress', e => {
+        setTimeout(() => {
+          const question = document.getElementById(i)
+          if (question.value.toLowerCase().trim() == words[i][1].toLowerCase()) {
+            question.value = words[i][1]
+            question.setAttribute('readonly', 'readonly')
+            question.style.borderColor = 'lightgreen'
+            if (words.length > (i + 1))
+              document.getElementById(i + 1).select()
+            else
+              setTimeout(() => { alert('Good job! You completed everything!') }, 100)
+          }
+          else if (e.key == 'Enter') {
+            question.setAttribute('readonly', 'readonly')
+            question.style.borderColor = 'red'
+            const span = document.createElement('span')
+            span.textContent = ` ${words[i][1]}  `
+            span.style.color = 'red'
+            span.style.fontSize = '80%'
+            span.setAttribute('id', `correct${i}`)
+            const button = document.createElement('button')
+            button.textContent = 'Override - I was correct'
+            button.setAttribute('id', `button${i}`)
+            button.style.fontSize = '70%'
+            button.addEventListener('click', () => {
+              const deleteButton = document.getElementById(`button${i}`)
+              const deleteSpan = document.getElementById(`correct${i}`)
+              const div = document.getElementById(`div${i}`)
+              div.removeChild(deleteButton)
+              div.removeChild(deleteSpan)
+              question.value = words[i][1]
+              question.style.borderColor = 'lightgreen'
+              if (words.length > (i + 1))
+                document.getElementById(i + 1).select()
+              else
+                setTimeout(() => { alert('Good job! You completed everything!') }, 100)
+            })
+            document.getElementById(`div${i}`).append(span)
+            document.getElementById(`div${i}`).append(button)
+            if (words.length > (i + 1))
+              document.getElementById(i + 1).select()
+            else
+              setTimeout(() => { alert('Good job! You completed everything!') }, 100)
+          }
+        }, 10)
+      })
+
+      wordDiv.append(wordDesc)
+      wordDiv.append(wordInput)
+
+      document.getElementById('questions').append(wordDiv)
+    }
+  }
+</script>

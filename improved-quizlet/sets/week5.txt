@@ -1,0 +1,12 @@
+Buenos días	good morning
+Buenas tardes	good afternoon
+Buenas noches	good evening/good night
+Hasta la vista	See you later
+Le presento a	I would like to introduce you to (name) (formal)
+Te presento a	I would like to introduce you to (name) (informal)
+¿Cómo estás?	How are you (familiar)
+Muy bien	Very Good
+Regular	so-so; OK
+No muy bien	Not very well
+Gracias	Thank you
+Excellente	Excellent

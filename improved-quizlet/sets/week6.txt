@@ -1,0 +1,20 @@
+Yo soy	I am
+Tú eres	You are (familiar)
+Él es	He is
+Ella es	She is
+Usted es	You are (formal)
+Nosotros somos	We are
+Nosotras somos	We are (all female group)
+Ellos son	They are
+Ellas son	They are (all female group)
+Ustedes son	You are (plural)
+La bandera	flag
+La capital	capital (city)
+La chica	girl
+El chico	boy
+La nacionalidad	nationality
+El país	country
+y	and
+¿De dónde eres?	Where are you from (informal)
+¿De dónde es usted?	Where are you from? (formal)
+De	from

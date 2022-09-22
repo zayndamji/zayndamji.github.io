@@ -1,0 +1,13 @@
+Hola	hi
+¿Cómo se llama usted?	What's your name? (formal)
+¿Cómo te llamas?	What is your name? (informal)
+Me llamo	My name is ...
+¿Y usted?	And you (formal)
+¿Y tú?	And you? (informal)
+Mucho gusto	It's a pleasure
+El gusto es mío	The pleasure is all mine
+Igualmente	Likewise
+Encantado/a	Charmed
+El nombre	Name
+El señor (sr)	Mr.
+La señora (sra)	Ms., Mrs
