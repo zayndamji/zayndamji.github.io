@@ -1,0 +1,39 @@
+un escritorio	large desk
+un pizarrón	whiteboard
+un gis	chalk
+un borrador	eraser
+un pupitre	student's desk
+una silla	seat
+un cuaderno	notebook
+un bolígrafo	pen
+un lápiz	pencil
+un libro	textbook
+una mochila	backpack
+una computadora	computer
+un reloj	clock
+un televisor	television
+una calculadora	calculator
+un bote de basura	trash can
+las materias	subjects
+el arte	art
+las ciencias	science
+el español	Spanish
+la geografía	geography
+la historia	history
+el inglés	English
+las matemáticas	math
+la música	music
+estudio	I study
+estudias	you study
+¿Cómo se dice _ en español?	How do you say _ in Spanish?
+Con permiso	Excuse me
+De nada	You're welcome
+¿De veras?	Really?
+¿En qué página estamos?	What page are we on?
+Más despacio, por favor	Slower, please
+Muchas gracias	Thanks a lot
+No entiendo	I don't understand.
+No sé	I don't know
+Por favor	Please
+¿Qué significa_?	What does _mean?
+Tengo una pregunta	I have a question
