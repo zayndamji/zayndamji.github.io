@@ -26,6 +26,10 @@
 
     button {
       margin-bottom: 0.5em;
+      background-color: inherit;
+      font-size: 18px;
+      padding: 7px;
+      font-family: sans-serif;
     }
   </style>
 
@@ -72,7 +76,7 @@
     $.get(filename, newContent => {
       clearWords()
       content = newContent
-      generateWords(content)
+      generateWords()
       generateQuiz()
       document.getElementById(0).select()
       restartQuiz()
@@ -82,14 +86,14 @@
   function flipWords(flip) {
     clearWords()
     flipped = flip
-    generateWords(content)
+    generateWords()
     generateQuiz()
     document.getElementById(0).select()
     restartQuiz()
   }
 
-  function generateWords(inputWords) {
-    inputWords.split('\n').forEach(word => {
+  function generateWords() {
+    content.split('\n').forEach(word => {
       if (flipped) words.push(word.split('\t').reverse())
       else words.push(word.split('\t'))
     })
@@ -128,7 +132,7 @@
     if (document.getElementById('newQuestions').value != '') {
       document.getElementById('newQuestionsDiv').setAttribute('hidden', 'hidden')
       content = document.getElementById('newQuestions').value
-      generateWords(content)
+      generateWords()
       generateQuiz()
     }
     else {
