@@ -14,7 +14,6 @@
     }
 
     div.question {
-      margin-bottom: 1em;
       display: inline-grid;
       vertical-align: top;
       align-items: center;
@@ -30,6 +29,15 @@
       font-size: 18px;
       padding: 7px;
       font-family: sans-serif;
+      border: solid 2px black;
+      border-radius: 10px;
+    }
+
+    select {
+      font-size: 18px;
+      border: solid 2px black;
+      padding: 6px;
+      border-radius: 10px;
     }
   </style>
 
@@ -45,17 +53,19 @@
   &nbsp;
   <button onclick="showImportFromQuizlet()" id="import">Import from Quizlet</button>
   <br>
-  <button onclick="importFromFile('./sets/week4.txt')" id="week4">Week 4</button>
-  &nbsp;
-  <button onclick="importFromFile('./sets/week5.txt')" id="week5">Week 5</button>
-  &nbsp;
-  <button onclick="importFromFile('./sets/week6.txt')" id="week6">Week 6</button>
-  &nbsp;
-  <button onclick="importFromFile('./sets/week13.txt')" id="week13">Week 13</button>
-  <br>
   <button onclick="flipWords(false)">English</button>
   &nbsp;
   <button onclick="flipWords(true)">Spanish</button>
+  <br>
+  <select id="set" onchange="selectSet()">
+    <option value="week4">Week 4</option>
+    <option value="week5">Week 5</option>
+    <option value="week6">Week 6</option>
+    <option value="week8">Week 8</option>
+    <option value="week9">Week 9</option>
+    <option value="week12">Week 12</option>
+    <option value="week13" selected>Week 13</option>
+  </select>
   <br><br>
   <div id="newQuestionsDiv" hidden>
     <textarea id="newQuestions" style="width: 30em; height: 30em;"></textarea>
@@ -81,6 +91,10 @@
       document.getElementById(0).select()
       restartQuiz()
     })
+  }
+
+  function selectSet() {
+    importFromFile(`./sets/${document.getElementById('set').value}.txt`)
   }
 
   function flipWords(flip) {
