@@ -127,7 +127,8 @@
   function generateQuestions() {
     if (document.getElementById('newQuestions').value != '') {
       document.getElementById('newQuestionsDiv').setAttribute('hidden', 'hidden')
-      generateWords(document.getElementById('newQuestions').value)
+      content = document.getElementById('newQuestions').value
+      generateWords(content)
       generateQuiz()
     }
     else {
