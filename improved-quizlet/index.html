@@ -1,56 +1,77 @@
 <!DOCTYPE html>
 
 <html>
-  <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
-    <style>
-      @import url('https://fonts.googleapis.com/css2?family=Roboto:ital@0;1&display=swap');
-      body {
-        font-family: Roboto, 'Open Sans', 'Helvetica Neue', sans-serif;
-        padding-left: 1em;
-      }
-      div.question {
-        margin-bottom: 1em;
-      }
-      button {
-        margin-bottom: 0.5em;
-      }
-    </style>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
-    <title>Improved Quizlet</title>
-    <link rel="icon" href="https://assets.quizlet.com/a/j/dist/app/i/logo/2021/q-twilight.389092a385cb51d.png">
-  </head>
-  <body>
-    <h1>Improved Quizlet (for Spanish 1, but you can use it for anything)</h1>
-    <h4>Press Enter if you think you are correct or if you want to skip the question.<br>You don't need to have the correct capitalization.</h4>
-    <button onclick="restartQuiz()" id="restart">Restart</button>
-    &nbsp;
-    <button onclick="showImportFromQuizlet()" id="import">Import from Quizlet</button>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:ital@0;1&display=swap');
+
+    body {
+      font-family: Roboto, 'Open Sans', 'Helvetica Neue', sans-serif;
+      padding-left: 1em;
+    }
+
+    div.question {
+      margin-bottom: 1em;
+      display: inline-grid;
+      vertical-align: top;
+      align-items: center;
+      position: relative;
+      border: solid 1px;
+      padding: .25em .5em;
+      margin: 5px;
+    }
+
+    button {
+      margin-bottom: 0.5em;
+    }
+  </style>
+
+  <title>Improved Quizlet</title>
+  <link rel="icon" href="https://assets.quizlet.com/a/j/dist/app/i/logo/2021/q-twilight.389092a385cb51d.png">
+</head>
+
+<body>
+  <h1>Improved Quizlet (for Spanish 1, but you can use it for anything)</h1>
+  <h4>Press Enter if you think you are correct or if you want to skip the question.<br>You don't need to have the
+    correct capitalization.</h4>
+  <button onclick="restartQuiz()" id="restart">Restart</button>
+  &nbsp;
+  <button onclick="showImportFromQuizlet()" id="import">Import from Quizlet</button>
+  <br>
+  <button onclick="importFromFile('./sets/week4.txt')" id="week4">Week 4</button>
+  &nbsp;
+  <button onclick="importFromFile('./sets/week5.txt')" id="week5">Week 5</button>
+  &nbsp;
+  <button onclick="importFromFile('./sets/week6.txt')" id="week6">Week 6</button>
+  &nbsp;
+  <button onclick="importFromFile('./sets/week13.txt')" id="week13">Week 13</button>
+  <br>
+  <button onclick="flipWords(false)">English</button>
+  &nbsp;
+  <button onclick="flipWords(true)">Spanish</button>
+  <br><br>
+  <div id="newQuestionsDiv" hidden>
+    <textarea id="newQuestions" style="width: 30em; height: 30em;"></textarea>
     <br>
-    <button onclick="importFromFile('./sets/week4.txt')" id="week4">Week 4</button>
-    &nbsp;
-    <button onclick="importFromFile('./sets/week5.txt')" id="week5">Week 5</button>
-    &nbsp;
-    <button onclick="importFromFile('./sets/week6.txt')" id="week6">Week 6</button>
-    <br><br>
-    <div id="newQuestionsDiv" hidden>
-      <textarea id="newQuestions" style="width: 30em; height: 30em;"></textarea>
-      <br>
-      <button onclick="generateQuestions()" id="submitNewQuestions">Generate Questions</button>
-    </div>
-    <div id="questions"></div>
-  </body>
+    <button onclick="generateQuestions()" id="submitNewQuestions">Generate Questions</button>
+  </div>
+  <div id="questions"></div>
+</body>
+
 </html>
 
 <script>
-  importFromFile('./sets/week6.txt')
+  importFromFile('./sets/week13.txt')
 
-  let words = []
+  let words = [], flipped = false, content = '';
 
   function importFromFile(filename) {
-    $.get(filename, content => {
+    $.get(filename, newContent => {
       clearWords()
+      content = newContent
       generateWords(content)
       generateQuiz()
       document.getElementById(0).select()
@@ -58,9 +79,19 @@
     })
   }
 
+  function flipWords(flip) {
+    clearWords()
+    flipped = flip
+    generateWords(content)
+    generateQuiz()
+    document.getElementById(0).select()
+    restartQuiz()
+  }
+
   function generateWords(inputWords) {
     inputWords.split('\n').forEach(word => {
-      words.push(word.split('\t'))
+      if (flipped) words.push(word.split('\t').reverse())
+      else words.push(word.split('\t'))
     })
   }
 
@@ -74,6 +105,9 @@
       const correct = document.getElementById(`correct${i}`)
       if (correct != undefined)
         div.removeChild(correct)
+      const button = document.getElementById(`button${i}`)
+      if (button != undefined)
+        div.removeChild(button)
     }
     document.getElementById(0).select()
     document.body.scrollTop = document.documentElement.scrollTop = 0
@@ -114,6 +148,8 @@
       wordInput.setAttribute('type', 'text')
       wordInput.setAttribute('id', i)
       wordInput.style.borderColor = 'lightgray'
+      wordInput.setAttribute('oninput', 'this.parentNode.dataset.value = this.value')
+      wordInput.setAttribute('size', '25')
       wordInput.addEventListener('keypress', e => {
         setTimeout(() => {
           const question = document.getElementById(i)
@@ -124,7 +160,7 @@
             if (words.length > (i + 1))
               document.getElementById(i + 1).select()
             else
-              setTimeout(() => { alert('Good job! You completed everything!') }, 100)
+              setTimeout(() => {alert('Good job! You completed everything!')}, 100)
           }
           else if (e.key == 'Enter') {
             question.setAttribute('readonly', 'readonly')
@@ -149,14 +185,14 @@
               if (words.length > (i + 1))
                 document.getElementById(i + 1).select()
               else
-                setTimeout(() => { alert('Good job! You completed everything!') }, 100)
+                setTimeout(() => {alert('Good job! You completed everything!')}, 100)
             })
             document.getElementById(`div${i}`).append(span)
             document.getElementById(`div${i}`).append(button)
             if (words.length > (i + 1))
               document.getElementById(i + 1).select()
             else
-              setTimeout(() => { alert('Good job! You completed everything!') }, 100)
+              setTimeout(() => {alert('Good job! You completed everything!')}, 100)
           }
         }, 10)
       })
