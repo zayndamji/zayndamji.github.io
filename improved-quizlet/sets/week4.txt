@@ -1,4 +1,4 @@
-Hola	hi
+Hola	Hello
 ¿Cómo se llama usted?	What's your name? (formal)
 ¿Cómo te llamas?	What is your name? (informal)
 Me llamo	My name is ...

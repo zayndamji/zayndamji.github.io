@@ -1,0 +1,192 @@
+Yo soy	I am
+Tú eres	You are (familiar)
+Él es	He is
+Ella es	She is
+Usted es	You are (formal)
+Nosotros somos	We are
+Nosotras somos	We are (all female group)
+Ellos son	They are
+Ellas son	They are (all female group)
+Ustedes son	You are (plural)
+La bandera	flag
+La capital	capital
+La chica	girl
+El chico	boy
+La nacionalidad	nationality
+El país	country
+y	and
+¿De dónde eres?	Where are you from (informal)
+¿De dónde es usted?	Where are you from? (formal)
+De	from
+el año	year
+¿Cuántos años tienes?	How old are you? (familiar)
+¿Cuántos años tiene usted?	How old are you? (formal)
+Yo tengo (número) años	I am (number) years old
+el hombre	the man
+el chico	the boy
+el pasajero	the male passenger
+el conductor	the male driver
+el profesor	the male teacher
+el turista	the male tourist
+la mujer	the woman
+la chica	the girl
+la pasajera	the female passenger
+la conductora	the female driver
+la profesora	the female teacher
+la turista	the female tourist
+el joven	the young man
+la joven	the young woman
+el estudiante	the male student
+la estudiante	the female student
+el cuarderno	the notebook
+el diario	the diary
+el diccionario	the dictionary
+el número	the number
+el video	the video
+el problema	the problem
+el programa	the program
+el autobús	the bus
+el país	the country
+la cosa	the thing
+la escuela	the school
+la computadora	the computer
+la maleta	the suitcase
+la palabra	the word
+la lección	the lesson
+la conversación	the conversation
+la nacionalidad	the nationality
+la comunidad	the community
+el mapa	the map
+un pasajero	a passenger
+unos pasajeros	some passengers
+una fotografía	a photograph
+unas fotografías	some photographs
+cero	zero
+uno	one
+dos	two
+tres	three
+cuatro	four
+cinco	five
+seis	six
+siete	seven
+ocho	eight
+nueve	nine
+diez	ten
+once	eleven
+doce	twelve
+trece	thirteen
+catorce	fourteen
+quince	fifteen
+dieciséis	sixteen
+diecisiete	seventeen
+dieciocho	eighteen
+diecinueve	nineteen
+veinte	twenty
+veintiuno	twenty one
+veintidós	twenty two
+veintitrés	twenty three
+veinticuatro	twenty four
+veinticinco	twenty five
+veintiséis	twenty six
+veintisiete	twenty seven
+veintiocho	twenty eight
+veintinueve	twenty nine
+treinta	thirty
+treinta y uno	thirty one
+treinta y dos	thirty two
+treinta y tres	thirty three
+treinta y cuatro	thirty four
+treinta y cinco	thirty five
+treinta y seis	thirty six
+treinta y siete	thirty seven
+treinta y ocho	thirty eight
+treinta y nueve	thirty nine
+cuarenta	forty
+cuarenta y uno	forty one
+cuarenta y dos	forty two
+cuarenta y tres	forty three
+cuarenta y cuatro	forty four
+cuarenta y cinco	forty five
+cuarenta y seis	forty six
+cuarenta y siete	forty seven
+cuarenta y ocho	forty eight
+cuarenta y nueve	forty nine
+cincuenta	fifty
+cincuenta y uno	fifty one
+cincuenta y dos	fifty two
+cincuenta y tres	fifty three
+cincuenta y cuatro	fifty four
+cincuenta y cinco	fifty five
+cincuenta y seis	fifty six
+cincuenta y siete	fifty seven
+cincuenta y ocho	fifty eight
+cincuenta y nueve	fifty nine
+sesenta	sixty
+un escritorio	large desk
+un pizarrón	whiteboard
+un gis	chalk
+un borrador	eraser
+un pupitre	student's desk
+una silla	seat
+un cuaderno	notebook
+un bolígrafo	pen
+un lápiz	pencil
+un libro	textbook
+una mochila	backpack
+una computadora	computer
+un reloj	clock
+un televisor	television
+una calculadora	calculator
+un bote de basura	trash can
+las materias	subjects
+el arte	art
+las ciencias	science
+el español	Spanish
+la geografía	geography
+la historia	history
+el inglés	English
+las matemáticas	math
+la música	music
+estudio	I study
+estudias	you study
+¿Cómo se dice _ en español?	How do you say _ in Spanish?
+Con permiso	Excuse me
+De nada	You're welcome
+¿De veras?	Really?
+¿En qué página estamos?	What page are we on?
+Más despacio, por favor	Slower, please
+Muchas gracias	Thanks a lot
+No entiendo	I don't understand.
+No sé	I don't know
+Por favor	Please
+¿Qué significa_?	What does _mean?
+Tengo una pregunta	I have a question
+domingo	Sunday
+lunes	Monday
+martes	Tuesday
+miércoles	Wednesday
+jueves	Thursday
+viernes	Friday
+sábado	Saturday
+¿Qué día es hoy?	What day is today?
+Hoy es...	Today is...
+enero	January
+febrero	February
+marzo	March
+abril	April
+mayo	May
+junio	June
+julio	July
+agosto	August
+septiembre	September
+octubre	October
+noviembre	November
+diciembre	December
+verde	green
+naranja	orange
+rosado	pink
+morado	purple
+amarillo	yellow
+rojo	red
+azul	blue
+cafe	brown
